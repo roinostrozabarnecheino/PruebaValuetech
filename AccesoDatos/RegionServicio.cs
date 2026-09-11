@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient; 
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AccesoDatos
@@ -122,6 +123,9 @@ namespace AccesoDatos
                     {
                         while (lector.Read())
                         {
+                            var xmlDatos = lector["InformacionAdicional"].ToString();
+                            var xml = System.Xml.Linq.XDocument.Parse(xmlDatos);
+                            var etiquetaInfo = xml.Element("Info");
                             var comuna = new Comuna
                             {
                                 IdRegion = Convert.ToInt32(lector["IdRegion"]),
@@ -129,9 +133,9 @@ namespace AccesoDatos
                                 Nombre = lector["Nombre"].ToString()!,
                                 InformacionAdicional = new InformacionGeografica
                                 {
-                                    Superficie = (decimal)Convert.ToDouble(lector["Superficie"]),
-                                    Poblacion = Convert.ToInt32(lector["Poblacion"]),
-                                    Densidad = Convert.ToInt32(lector["Densidad"])
+                                    Superficie = Convert.ToDecimal(etiquetaInfo.Element("Superficie").Value),
+                                    Poblacion = Convert.ToInt32(etiquetaInfo.Element("Poblacion").Value),
+                                    Densidad = Convert.ToDecimal(etiquetaInfo.Element("Poblacion").Attribute("Densidad").Value)
                                 }
                             };
                             lista.Add(comuna);

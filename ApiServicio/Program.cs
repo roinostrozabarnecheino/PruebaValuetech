@@ -22,6 +22,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("PermitirMVC"); 
 app.UseAuthorization();
+app.MapGet("/", () => Results.Redirect("/api/region"));
 app.MapControllers(); 
 
 app.Run();

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Comunas de la Región " + ViewBag.IdRegion;
+    ViewData["Title"] = "Comunas de la Región " + ViewBag.idRegion;
     int idRegion = ViewBag.IdRegion;
 }
 
@@ -12,13 +12,13 @@
         @foreach (var comuna in Model.EnumerateArray())
         {
             <tr>
-                <td>@comuna.GetProperty("IdComuna")</td>
-                <td>@comuna.GetProperty("Nombre")</td>
-                <td>@comuna.GetProperty("InformacionAdicional")</td>
+                <td>@comuna.GetProperty("idComuna")</td>
+                <td>@comuna.GetProperty("nombre")</td>
+                <td>@comuna.GetProperty("informacionAdicional")</td>
                 <td>
                     <a asp-action="Editar"
                        asp-route-idRegion="@idRegion"
-                       asp-route-idComuna="@comuna.GetProperty("IdComuna")"
+                       asp-route-idComuna="@comuna.GetProperty("idComuna")"
                        class="btn btn-sm btn-warning">Editar</a>
                 </td>
             </tr>

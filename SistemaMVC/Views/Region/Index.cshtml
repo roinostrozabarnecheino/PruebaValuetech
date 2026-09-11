@@ -2,21 +2,66 @@
     ViewData["Title"] = "Regiones de Chile";
 }
 
-<h1>Regiones</h1>
+<h1>Regiones de Chile</h1>
 
-<table class="table table-striped">
-    <thead><tr><th>ID</th><th>Nombre</th><th>Acciones</th></tr></thead>
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
     <tbody>
+    @if (Model.ValueKind == System.Text.Json.JsonValueKind.Array)
+    {
         @foreach (var region in Model.EnumerateArray())
         {
             <tr>
-                <td>@region.GetProperty("IdRegion")</td>
-                <td>@region.GetProperty("Nombre")</td>
                 <td>
-                    <a asp-action="Comunas" asp-route-idRegion="@region.GetProperty("IdRegion")"
-                       class="btn btn-primary">Ver Comunas</a>
+                    @{
+                        System.Text.Json.JsonElement rId;
+                        var idProp = region.TryGetProperty("IdRegion", out rId)
+                            ? rId
+                            : region.GetProperty("idRegion");
+                        @idProp
+                    }
+                </td>
+                <td>
+                    @{
+                        System.Text.Json.JsonElement rNom;
+                        var nomProp = region.TryGetProperty("Nombre", out rNom)
+                            ? rNom
+                            : region.GetProperty("nombre");
+                        @nomProp
+                    }
+                </td>
+                <td>
+                    @{
+                        System.Text.Json.JsonElement idTemp;
+                        int idValor;
+                        if (region.TryGetProperty("IdRegion", out idTemp))
+                        {
+                            idValor = idTemp.GetInt32();
+                        }
+                        else
+                        {
+                            idValor = region.GetProperty("idRegion").GetInt32();
+                        }
+                    }
+                    <a href="@Url.Action("Comunas", new { idRegion = idValor })">Ver Comunas</a>
                 </td>
             </tr>
         }
+    }
+    else
+    {
+        <tr>
+            <td colspan="3">No hay datos disponibles</td>
+        </tr>
+    }
     </tbody>
 </table>
+
+<br />
+<a asp-action="Index">Volver al inicio</a>

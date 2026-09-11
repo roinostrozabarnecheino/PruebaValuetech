@@ -30,10 +30,10 @@ namespace ClienteMvc.Controllers
         public async Task<IActionResult> Comunas(int idRegion)
         {
             var cliente = _httpClient.CreateClient("ApiServicio");
-            var respuesta = await cliente.GetAsync($"api/region/{idRegion}/comuna");
+            var respuesta = await cliente.GetAsync($"api/region/{idRegion}/comunas");
 
-            if (!respuesta.IsSuccessStatusCode)
-                return RedirectToAction("Comunas");
+            //if (!respuesta.IsSuccessStatusCode)
+            //    return View("Error");
 
             var json = await respuesta.Content.ReadAsStringAsync();
             ViewBag.IdRegion = idRegion;
