@@ -1,0 +1,17 @@
+﻿{
+    "$schema": "https://json.schemastore.org/launchsettings.json",
+    "profiles": {
+        "ClienteMvc":
+        {
+            "commandName": "Project",
+            "dotnetRunMessages": true,
+            "launchBrowser": true,
+            "launchUrl": "Region",
+            "applicationUrl": "http://localhost:7209",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
+    }
+}
+}

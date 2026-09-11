@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Regiones de Chile";
+}
+
+<h1>Regiones</h1>
+
+<table class="table table-striped">
+    <thead><tr><th>ID</th><th>Nombre</th><th>Acciones</th></tr></thead>
+    <tbody>
+        @foreach (var region in Model.EnumerateArray())
+        {
+            <tr>
+                <td>@region.GetProperty("IdRegion")</td>
+                <td>@region.GetProperty("Nombre")</td>
+                <td>
+                    <a asp-action="Comunas" asp-route-idRegion="@region.GetProperty("IdRegion")"
+                       class="btn btn-primary">Ver Comunas</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="../AccesoDatos/AccesoDatos.csproj" />
+  <Project Path="../ApiServicio/ApiServicio.csproj" />
+  <Project Path="../SistemaMVC/SistemaMVC.csproj" />
   <Project Path="PruebaValuetech.csproj" />
 </Solution>

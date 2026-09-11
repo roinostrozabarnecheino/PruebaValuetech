@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Comunas de la Región " + ViewBag.IdRegion;
+    int idRegion = ViewBag.IdRegion;
+}
+
+<h1>Comunas — Región @idRegion</h1>
+<a asp-action="Index" class="btn btn-secondary mb-3">← Volver a Regiones</a>
+
+<table class="table table-striped">
+    <thead><tr><th>ID</th><th>Nombre</th><th>Información Adicional</th><th>Editar</th></tr></thead>
+    <tbody>
+        @foreach (var comuna in Model.EnumerateArray())
+        {
+            <tr>
+                <td>@comuna.GetProperty("IdComuna")</td>
+                <td>@comuna.GetProperty("Nombre")</td>
+                <td>@comuna.GetProperty("InformacionAdicional")</td>
+                <td>
+                    <a asp-action="Editar"
+                       asp-route-idRegion="@idRegion"
+                       asp-route-idComuna="@comuna.GetProperty("IdComuna")"
+                       class="btn btn-sm btn-warning">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

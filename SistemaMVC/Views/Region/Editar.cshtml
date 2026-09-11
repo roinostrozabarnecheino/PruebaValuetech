@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Editar Comuna";
+    int idRegion = ViewBag.IdRegion;
+}
+
+<h1>Editar Comuna</h1>
+<a asp-action="Comunas" asp-route-idRegion="@idRegion" class="btn btn-secondary mb-3">← Volver</a>
+
+<form asp-action="Editar" method="post" class="row g-3">
+    <input type="hidden" name="idComuna" value="@Model.GetProperty("IdComuna")" />
+    <input type="hidden" name="idRegion" value="@idRegion" />
+
+    <div class="col-md-6">
+        <label class="form-label">Nombre de la Comuna</label>
+        <input type="text" name="Nombre" value="@Model.GetProperty("Nombre")" class="form-control" required />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Información Adicional (Superficie, Población, Densidad)</label>
+        <textarea name="InformacionAdicional" class="form-control" rows="3">@Model.GetProperty("InformacionAdicional")</textarea>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </div>
+</form>
